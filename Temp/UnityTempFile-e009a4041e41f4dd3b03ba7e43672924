@@ -292,4 +292,5 @@
 /define:CSHARP_7_3_OR_NEWER
 "Assets/killer/KillerSCript.cs"
 "Assets/Player/PlayerController.cs"
-"Assets/Zoombie/Zoombie Script.cs"
+"Assets/Zoombie/zoombieScript.cs"
+"Assets/zoombieScript.cs"

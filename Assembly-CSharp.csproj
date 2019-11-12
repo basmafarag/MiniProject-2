@@ -66,6 +66,7 @@
     <Compile Include="Assets\killer\KillerSCript.cs" />
     <Compile Include="Assets\Player\PlayerController.cs" />
     <Compile Include="Assets\Zoombie\zoombieScript.cs" />
+    <Compile Include="Assets\zoombieScript.cs" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>/Users/fatmafarag/3D model/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>

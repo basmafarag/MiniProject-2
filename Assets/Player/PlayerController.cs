@@ -26,7 +26,7 @@ public class PlayerController : MonoBehaviour
     public GameObject sword;
 
 
-    //bool for the decision if with a sword or nottt TODO
+    // TODO
     public bool withSword;
 
 

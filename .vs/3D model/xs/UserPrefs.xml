@@ -1,9 +1,10 @@
 ﻿<Properties StartupConfiguration="{649CB10D-8BF9-3A6D-B5FA-01E547A7015C}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Player/PlayerController.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Zoombie/zoombieScript.cs">
     <Files>
       <File FileName="Assets/killer/KillerSCript.cs" Line="1" Column="1" />
-      <File FileName="Assets/Player/PlayerController.cs" Line="30" Column="26" />
-      <File FileName="Assets/zoombie.cs" Line="29" Column="22" />
+      <File FileName="Assets/Player/PlayerController.cs" Line="13" Column="1" />
+      <File FileName="Assets/zoombie.cs" Line="54" Column="1" />
+      <File FileName="Assets/zoombieScript.cs" Line="1" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -11,8 +12,9 @@
           <Node name="3D model" expanded="True">
             <Node name="Assets" expanded="True">
               <Node name="killer" expanded="True" />
-              <Node name="Player" expanded="True">
-                <Node name="PlayerController.cs" selected="True" />
+              <Node name="Player" expanded="True" />
+              <Node name="Zoombie" expanded="True">
+                <Node name="zoombieScript.cs" selected="True" />
               </Node>
             </Node>
           </Node>
