@@ -13,16 +13,20 @@ public class PlayerController : MonoBehaviour
     CharacterController controller;
     float rotSpeed = 80;
     float rot = -34f;
+    float rotatedir = 0;
     bool choose = true;
     public GameObject KillerObject;
     public GameObject VictimObject;
     Animator victim;
     Animator killer;
     public Canvas Choice1;
+    public Canvas Choice2;
     public Canvas congratulations;
     bool killingKiller = false;
     bool saveMohsen = false;
     bool leaveMohsen = false;
+    bool RRoom = false;
+    bool LRoom = false;
     public GameObject sword;
 
 
@@ -44,11 +48,13 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
 
-        movemenet();
+        //movemenet();
         if (true)
         {
             LeaveMohsen();
             SaveMohsen();
+            LeftRoom();
+            RightRoom();
         }
 
         if (Input.GetMouseButton(0))
@@ -60,35 +66,37 @@ public class PlayerController : MonoBehaviour
 
     void SaveMohsen()
     {
-        if ((Input.GetKeyUp(KeyCode.R) || saveMohsen) && !leaveMohsen)
+        if ((Input.GetKeyUp(KeyCode.H) || saveMohsen) && !leaveMohsen)
         {
             saveMohsen = true;
             withSword = true;
             Choice1.gameObject.SetActive(false);
-            if (this.gameObject.transform.position.x > -12f)
-        {
-            if (!killingKiller)
+
+            if (this.gameObject.transform.position.x > 2f)
             {
-                anim.SetInteger("condition", 1);
-                movedir = new Vector3(0, 0, 1);
-                movedir *= speed;
-                movedir = transform.TransformDirection(movedir);
+                if (!killingKiller)
+                {
+                    controller.Move(movedir * Time.deltaTime);
+                    anim.SetInteger("condition", 1);
+                    movedir = new Vector3(0, 0, 1);
+                    movedir *= speed;
+                    movedir = transform.TransformDirection(movedir);
+                }
             }
-        }
-        else
-        {
-            if (!killingKiller)
+            else
             {
-                anim.SetInteger("condition", 0);
-                movedir = new Vector3(0, 0, 0);
-                anim.SetInteger("condition", 2);
-                StartCoroutine(KillerDie());
-                killingKiller = true;
+                if (!killingKiller)
+                {
+                    anim.SetInteger("condition", 0);
+                    movedir = new Vector3(0, 0, 0);
+                    anim.SetInteger("condition", 2);
+                    StartCoroutine(KillerDie());
+                    killingKiller = true;
+
+                }
+                
 
             }
-            
-
-        }
         }
 
     }
@@ -105,8 +113,9 @@ public class PlayerController : MonoBehaviour
         sword.SetActive(true);
         congratulations.gameObject.SetActive(true);
 
-
-
+        yield return new WaitForSeconds(2);
+        congratulations.gameObject.SetActive(false);
+        Choice2.gameObject.SetActive(true);
 
     }
 
@@ -138,7 +147,90 @@ public class PlayerController : MonoBehaviour
         choose = false;
         leaveMohsen = false;
 
+        yield return new WaitForSeconds(2);
+        congratulations.gameObject.SetActive(false);
+        Choice2.gameObject.SetActive(true);
+
     }
+
+    void LeftRoom()
+    {
+        //bosbos room
+        if ((Input.GetKeyUp(KeyCode.L) || LRoom) && !RRoom)
+        {
+            LRoom = true;
+            Choice2.gameObject.SetActive(false);
+            //Debug.Log("you chose left room, lucky");
+
+            if (transform.position.x > -22f)
+            {
+                rot = -112f;
+                transform.eulerAngles = new Vector3(0, rot, 0);
+                controller.Move(movedir * Time.deltaTime);
+                anim.SetInteger("condition", 1);
+                movedir = new Vector3(0, 0, 1);
+                movedir *= speed;
+                movedir = transform.TransformDirection(movedir);
+
+            }
+            else
+            {
+                rot = -90f;
+                transform.eulerAngles = new Vector3(0, rot, 0);
+                RRoom = false;
+                anim.SetInteger("condition", 0);
+                movedir = new Vector3(0, 0, 0);
+                movedir = transform.TransformDirection(movedir);
+            }
+
+            if (transform.position.x < -20f)
+            {
+                rot = -90f;
+                transform.eulerAngles = new Vector3(0, rot, 0);
+            }
+
+        }
+    }
+
+    void RightRoom()
+    {
+        //fawzy room
+        if ((Input.GetKeyUp(KeyCode.R) || RRoom) && !LRoom)
+        {
+            RRoom = true;
+            Choice2.gameObject.SetActive(false);
+            //Debug.Log("you chose right room, unlucky");
+            
+            if (transform.position.x > -27f)
+            {
+                rot = -67f;
+                transform.eulerAngles = new Vector3(0, rot, 0);
+                controller.Move(movedir * Time.deltaTime);
+                anim.SetInteger("condition", 1);
+                movedir = new Vector3(0, 0, 1);
+                movedir *= speed;
+                movedir = transform.TransformDirection(movedir);
+                
+            }
+            else
+            {
+                rot = -90f;
+                transform.eulerAngles = new Vector3(0, rot, 0);
+                RRoom = false;
+                anim.SetInteger("condition", 0);
+                movedir = new Vector3(0, 0, 0);
+                movedir = transform.TransformDirection(movedir);
+            }
+
+            if (transform.position.x < -20f)
+            {
+                rot = -90f;
+                transform.eulerAngles = new Vector3(0, rot, 0);
+            }
+        }
+
+    }
+
     void movemenet()
     {
         if (Input.GetKey(KeyCode.W))
