@@ -12,18 +12,20 @@ public class zoombieScript : MonoBehaviour
     Animator anim;
     Animator victim;
     Animator killer;
+    Animator pop;
     Vector3 movedir = Vector3.zero;
     int speed = 1;
     CharacterController controller;
     float gravity = 8;
-    float timeLeft = 10.0f;
+    float timeLeft = 2.0f;
 
 
     void Start()
     {
         anim = GetComponent<Animator>();
         controller = GetComponent<CharacterController>();
-        player = PlayerObject.GetComponent<GameObject>();
+        player = GameObject.FindWithTag("Player");
+        pop = PlayerObject.GetComponent<Animator>();
         killer = KillerObject.GetComponent<Animator>();
         victim = VictimObject.GetComponent<Animator>();
 
@@ -31,27 +33,23 @@ public class zoombieScript : MonoBehaviour
 
     void Update() 
     {
-        killZoombie();
         int test = killer.GetInteger("condition");
         int test1 = victim.GetInteger("condition");
-
-        if (test == 1)    //TODO
+       // Debug.Log(player.transform.position.x);
+        if (test == 1 && player.transform.position.x > -23 && player.transform.position.x < -20)    //test : withSword
         {
-            // if test = 1 then it means you saved mohsen ang got the sword so kill zombie 
-            killZoombie();
-            Debug.Log("zombie died!!");
+            PlayerKill();
         }
         else 
-            if((test1 == 1) && (player.transform.position.x == transform.position.x)) //needs to be checked
+            if((test1 == 1) && player.transform.position.x > -23 && player.transform.position.x < -20) //needs to be checked
             {
-                Debug.Log("player died!!");
-                killPlayer();
+                zoombieKill();
             }
 
     }
 
 
-    public void killPlayer()
+    public void zoombieKill()
     {
 
         if (this.gameObject.transform.position.x < -24) { 
@@ -65,13 +63,17 @@ public class zoombieScript : MonoBehaviour
         else
         {
             anim.SetInteger("condition", 0);
-            Debug.Log("dfdskfhdsfhdkfjhdkfhadkfhadkjfhadkjfhad");
+            //Debug.Log(pop.GetInteger("condition"));
+            //pop.SetInteger("condition", 5);
+            //Debug.Log(pop.GetInteger("condition"));
 
         }
 
+
+
     }
 
-    public void killZoombie()
+    public void PlayerKill()
     {
 
         if (this.gameObject.transform.position.x < -24)
@@ -90,9 +92,9 @@ public class zoombieScript : MonoBehaviour
 
             if (timeLeft < 0)
             {
+                //pop.SetInteger("condition", 2);
                 anim.SetInteger("condition", 2);
             }
-            
 
         }
 

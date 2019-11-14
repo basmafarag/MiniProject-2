@@ -1,0 +1,33 @@
+﻿<Properties StartupConfiguration="{561ABC75-9440-49B6-0ED9-4A229CC103C3}|">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/GameMang.cs">
+    <Files>
+      <File FileName="Assets/Scripts/zoombieScript.cs" Line="97" Column="1" />
+      <File FileName="Assets/Player/PlayerController.cs" Line="262" Column="1" />
+      <File FileName="Assets/Scripts/Explosion.cs" Line="60" Column="9" />
+      <File FileName="Assets/Scripts/GameOverMenu.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/GameMang.cs" Line="1" Column="1" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="MiniProject-2" expanded="True">
+            <Node name="Assets" expanded="True">
+              <Node name="Player" expanded="True" />
+              <Node name="Scripts" expanded="True">
+                <Node name="GameMang.cs" selected="True" />
+              </Node>
+              <Node name="Zoombie" expanded="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="9fc6ebbd-08ea-4f85-a3d8-0da9d5ad466c" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>

@@ -15,29 +15,38 @@ public class PlayerController : MonoBehaviour
     float rot = -34f;
     float rotatedir = 0;
     bool choose = true;
+    public GameObject ZombieObject;
     public GameObject KillerObject;
     public GameObject VictimObject;
+    GameObject zozo;
     Animator victim;
     Animator killer;
     public Canvas Choice1;
     public Canvas Choice2;
     public Canvas congratulations;
     bool killingKiller = false;
+    bool rooms = false;
     bool saveMohsen = false;
     bool leaveMohsen = false;
     bool RRoom = false;
     bool LRoom = false;
+    bool walk = false;
     public GameObject sword;
 
 
     // TODO
-    public bool withSword;
+    public bool withSword = false;
+    float timeLeft = 6.0f;
+    float time = 3.0f;
+
+    float timeGame = 7.0f;
 
 
     // Start is called before the first frame update
     void Start()
     {
         anim = GetComponent<Animator>();
+        zozo = GameObject.FindWithTag("zozo");
         killer = KillerObject.GetComponent<Animator>();
         victim = VictimObject.GetComponent<Animator>();
         Choice1.gameObject.SetActive(true);
@@ -53,8 +62,13 @@ public class PlayerController : MonoBehaviour
         {
             LeaveMohsen();
             SaveMohsen();
-            LeftRoom();
-            RightRoom();
+            if (rooms)
+            {
+                LeftRoom();
+                RightRoom();
+            }
+
+            //movemenet();
         }
 
         if (Input.GetMouseButton(0))
@@ -116,6 +130,7 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(2);
         congratulations.gameObject.SetActive(false);
         Choice2.gameObject.SetActive(true);
+        rooms = true;
 
     }
 
@@ -150,6 +165,7 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(2);
         congratulations.gameObject.SetActive(false);
         Choice2.gameObject.SetActive(true);
+        rooms = true;
 
     }
 
@@ -164,7 +180,7 @@ public class PlayerController : MonoBehaviour
 
             if (transform.position.x > -22f)
             {
-                rot = -112f;
+                rot = -113f;
                 transform.eulerAngles = new Vector3(0, rot, 0);
                 controller.Move(movedir * Time.deltaTime);
                 anim.SetInteger("condition", 1);
@@ -180,6 +196,8 @@ public class PlayerController : MonoBehaviour
                 RRoom = false;
                 anim.SetInteger("condition", 0);
                 movedir = new Vector3(0, 0, 0);
+                //call method bydrab aw fall
+                PlayerZombie();
                 movedir = transform.TransformDirection(movedir);
             }
 
@@ -201,7 +219,7 @@ public class PlayerController : MonoBehaviour
             Choice2.gameObject.SetActive(false);
             //Debug.Log("you chose right room, unlucky");
             
-            if (transform.position.x > -27f)
+            if (transform.position.x > -27f) // TODO
             {
                 rot = -67f;
                 transform.eulerAngles = new Vector3(0, rot, 0);
@@ -219,6 +237,7 @@ public class PlayerController : MonoBehaviour
                 RRoom = false;
                 anim.SetInteger("condition", 0);
                 movedir = new Vector3(0, 0, 0);
+                //anim.SetInteger("condition", 2);
                 movedir = transform.TransformDirection(movedir);
             }
 
@@ -229,6 +248,63 @@ public class PlayerController : MonoBehaviour
             }
         }
 
+    }
+
+    void PlayerZombie()
+    {
+        Debug.Log(zozo.transform.position.x);
+
+        if (withSword && zozo.transform.position.x > -24)
+        {
+
+            
+            anim.SetInteger("condition", 2);
+            time -= Time.deltaTime;
+
+
+            if (time < 0)
+            {
+                anim.SetInteger("condition", 0);
+                if (this.transform.position.x > -48f) // TODO
+                {
+                    anim.SetInteger("condition", 1);
+                    movedir = new Vector3(0, 0, 1);
+                    movedir *= speed;
+                    movedir = transform.TransformDirection(movedir);
+                    //rot += Input.GetAxis("Horizontal") * rotSpeed * Time.deltaTime;
+                    //transform.eulerAngles = new Vector3(0, rot, 0);
+                    controller.Move(movedir * Time.deltaTime);
+                    movedir.y -= gravity * Time.deltaTime;
+
+                }
+
+
+            }
+
+        }
+        else
+        {
+            
+            if (!withSword && zozo.transform.position.x > -24)
+            {
+                timeLeft -= Time.deltaTime;
+                timeGame -= Time.deltaTime;
+
+                if (timeLeft < 0)
+                {
+                    anim.SetInteger("condition", 3);
+
+
+                }
+                if (timeGame < 0)
+               {
+                    FindObjectOfType<GameMang>().GameOver();
+
+
+                }
+            }
+        }
+            
     }
 
     void movemenet()

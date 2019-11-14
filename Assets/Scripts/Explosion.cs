@@ -16,7 +16,6 @@ public class Explosion : MonoBehaviour
     void Start()
     {
         countdown = del;
-        GameObject player = Player.GetComponent<GameObject>();
     }
 
     // Update is called once per frame
@@ -58,7 +57,16 @@ public class Explosion : MonoBehaviour
 
         Destroy(gameObject);
 
+
+
+
         FindObjectOfType<GameMang>().GameOver();
+
+    }
+    IEnumerator die()
+    {
+        yield return new WaitForSeconds(2);
+
 
     }
 }
